@@ -1,0 +1,10 @@
+$kind: http-request
+name: https://newsapi.org/v2/everything?q=Apple&sortBy=popularity
+url: https://newsapi.org/v2/everything?q=Apple&sortBy=popularity
+method: GET
+headers:
+  Authorization: fe6e4c55f3a146c2a6f9830a82f97c50
+queryParams:
+  q: Apple
+  sortBy: popularity
+order: 1776269877811
