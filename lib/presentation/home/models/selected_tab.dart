@@ -1,0 +1,1 @@
+enum SelectedTab { home, news }

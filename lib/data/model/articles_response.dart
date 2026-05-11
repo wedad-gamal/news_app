@@ -1,12 +1,12 @@
-class ArticleResponse {
+class ArticlesResponse {
   final String? status;
   final int? totalResults;
   final List<Article>? articles;
 
-  ArticleResponse({this.status, this.totalResults, this.articles});
+  ArticlesResponse({this.status, this.totalResults, this.articles});
 
-  factory ArticleResponse.fromJson(Map<String, dynamic> json) {
-    return ArticleResponse(
+  factory ArticlesResponse.fromJson(Map<String, dynamic> json) {
+    return ArticlesResponse(
       status: json['status'],
       totalResults: json['totalResults'],
       articles: json['articles'] != null
