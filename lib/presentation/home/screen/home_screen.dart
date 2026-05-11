@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/base/base_view.dart';
 import 'package:news_app/core/providers/app_config_provider.dart';
 import 'package:news_app/core/resources/strings_manager.dart';
 import 'package:news_app/data/apis/api_client.dart';
@@ -18,33 +19,18 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
+class _HomeScreenState extends BaseView<HomeScreen, HomeViewModel>
     implements HomeScreenNavigator {
-  HomeViewModel homeViewModel = HomeViewModel();
-
   @override
   void closeDrawer() {
     Navigator.pop(context);
   }
 
   @override
-  void initState() {
-    super.initState();
-    homeViewModel.navigator = this;
-  }
-
-  @override
-  void dispose() {
-    //homeViewModel.dispose();
-    homeViewModel.navigator = null;
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     var provider = Provider.of<AppConfigProvider>(context);
     return ChangeNotifierProvider.value(
-      value: homeViewModel,
+      value: viewModel,
       child: Consumer<HomeViewModel>(
         builder: (context, viewModel, child) {
           return PopScope(
@@ -87,5 +73,10 @@ class _HomeScreenState extends State<HomeScreen>
         },
       ),
     );
+  }
+
+  @override
+  HomeViewModel createViewModel() {
+    return HomeViewModel();
   }
 }
