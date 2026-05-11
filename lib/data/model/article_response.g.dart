@@ -6,8 +6,8 @@ part of 'article_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ArticleReponse _$ArticleReponseFromJson(Map<String, dynamic> json) =>
-    ArticleReponse(
+ArticleResponse _$ArticleResponseFromJson(Map<String, dynamic> json) =>
+    ArticleResponse(
       status: json['status'] as String?,
       totalResults: (json['totalResults'] as num?)?.toInt(),
       articles: (json['articles'] as List<dynamic>?)
@@ -15,7 +15,7 @@ ArticleReponse _$ArticleReponseFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$ArticleReponseToJson(ArticleReponse instance) =>
+Map<String, dynamic> _$ArticleResponseToJson(ArticleResponse instance) =>
     <String, dynamic>{
       'status': instance.status,
       'totalResults': instance.totalResults,

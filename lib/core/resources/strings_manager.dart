@@ -27,6 +27,7 @@ class StringsManager {
   static const String tabAfterpatron = 'Afterpatron';
   static const String tabANGA = 'ANGA';
   static const String tabAnyNews = 'Any News';
+  static const String noSourcesFound = 'No sources found';
 
   // Settings / Drawer
   static const String settingsGoToHome = 'Go To Home';

@@ -5,7 +5,7 @@ import 'article.dart';
 part 'article_response.g.dart';
 
 @JsonSerializable()
-class ArticleReponse {
+class ArticleResponse {
   @JsonKey(name: "status")
   final String? status;
   @JsonKey(name: "totalResults")
@@ -13,13 +13,13 @@ class ArticleReponse {
   @JsonKey(name: "articles")
   final List<Article>? articles;
 
-  ArticleReponse({this.status, this.totalResults, this.articles});
+  ArticleResponse({this.status, this.totalResults, this.articles});
 
-  factory ArticleReponse.fromJson(Map<String, dynamic> json) {
-    return _$ArticleReponseFromJson(json);
+  factory ArticleResponse.fromJson(Map<String, dynamic> json) {
+    return _$ArticleResponseFromJson(json);
   }
 
   Map<String, dynamic> toJson() {
-    return _$ArticleReponseToJson(this);
+    return _$ArticleResponseToJson(this);
   }
 }

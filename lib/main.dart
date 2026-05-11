@@ -3,7 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/core/providers/app_config_provider.dart';
 import 'package:news_app/core/resources/app_theme.dart';
-import 'package:news_app/ui/home/screen/home_screen.dart';
+import 'package:news_app/presentation/home/screen/home_screen.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {

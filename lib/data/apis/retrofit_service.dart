@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:news_app/data/model/article_response.dart';
 import 'package:news_app/data/model/articles_response.dart';
 import 'package:news_app/data/model/source_response.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
