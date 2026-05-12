@@ -7,8 +7,6 @@ import 'package:news_app/data/model/source_response.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:retrofit/retrofit.dart';
 
-import '../model/article.dart';
-import '../model/source.dart';
 
 part 'retrofit_service.g.dart';
 

@@ -10,7 +10,7 @@ SourceResponse _$SourceResponseFromJson(Map<String, dynamic> json) =>
     SourceResponse(
       status: json['status'] as String?,
       sources: (json['sources'] as List<dynamic>?)
-          ?.map((e) => Source.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => SourceDto.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

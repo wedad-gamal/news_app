@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/data/apis/retrofit_service.dart';
-import 'package:news_app/data/model/article.dart' show Article;
+import 'package:news_app/data/model/article.dart' show ArticleDto;
 import 'package:news_app/data/model/category.dart';
 import 'package:news_app/data/model/source.dart';
+import 'package:news_app/data/repository/news_repository.dart';
+import 'package:news_app/domain/entity/article_entity.dart';
+import 'package:news_app/domain/entity/source_entity.dart';
 
 class NewsTabViewModel extends ChangeNotifier {
   final Category category;
+  final NewsRepository _newsRepository;
+  NewsTabViewModel(this.category, this._newsRepository);
 
-  NewsTabViewModel({required this.category});
-
-  List<Source> sources = [];
+  List<SourceEntity> sources = [];
   String newsErrorMessage = "";
   bool newsIsLoading = false;
 
@@ -17,10 +20,8 @@ class NewsTabViewModel extends ChangeNotifier {
     newsIsLoading = true;
     notifyListeners();
     try {
-      var response = await RetrofitService.instance.getSources(
-        category: category.id,
-      );
-      sources = response.sources ?? [];
+      var response = await _newsRepository.getSources(category.id);
+      sources = response;
       if (sources.isNotEmpty) {
         getArticles(0);
       }
@@ -32,7 +33,7 @@ class NewsTabViewModel extends ChangeNotifier {
     }
   }
 
-  List<Article> articles = [];
+  List<ArticleEntity> articles = [];
   bool articleIsLoading = false;
   String articleErrorMessage = '';
 
@@ -41,10 +42,8 @@ class NewsTabViewModel extends ChangeNotifier {
     notifyListeners();
     var selectedSourceId = sources[index].id ?? "";
     try {
-      var response = await RetrofitService.instance.getArticles(
-        sources: selectedSourceId,
-      );
-      articles = response.articles ?? [];
+      var response = await _newsRepository.getArticles(selectedSourceId);
+      articles = response;
     } catch (e) {
       articleErrorMessage = e.toString();
     } finally {

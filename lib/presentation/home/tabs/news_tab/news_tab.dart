@@ -5,9 +5,12 @@ import 'package:news_app/core/resources/strings_manager.dart';
 import 'package:news_app/core/utilies/extensions.dart';
 import 'package:news_app/data/apis/api_client.dart';
 import 'package:news_app/data/apis/retrofit_service.dart';
+import 'package:news_app/data/data_source/news_remote_data_source.dart';
+import 'package:news_app/data/mapper/news_mapper.dart';
 import 'package:news_app/data/model/articles_response.dart';
 import 'package:news_app/data/model/category.dart';
 import 'package:news_app/data/model/sources_response.dart';
+import 'package:news_app/data/repository/news_repository.dart';
 import 'package:news_app/presentation/home/tabs/news_tab/news_tab_view_model.dart';
 import 'package:news_app/presentation/home/widgets/articles/news_list.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +25,11 @@ class NewsTab extends StatefulWidget {
 
 class _NewsTabState extends State<NewsTab> {
   late NewsTabViewModel newsTabViewModel = NewsTabViewModel(
-    category: widget.category,
+    widget.category,
+    NewsRepository(
+      NewsRemoteDataSource(RetrofitService.instance),
+      NewsMapper(),
+    ),
   );
 
   @override
