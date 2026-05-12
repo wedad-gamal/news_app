@@ -11,7 +11,7 @@ ArticleResponse _$ArticleResponseFromJson(Map<String, dynamic> json) =>
       status: json['status'] as String?,
       totalResults: (json['totalResults'] as num?)?.toInt(),
       articles: (json['articles'] as List<dynamic>?)
-          ?.map((e) => Article.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => ArticleDto.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

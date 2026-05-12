@@ -6,7 +6,7 @@ part of 'source.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Source _$SourceFromJson(Map<String, dynamic> json) => Source(
+SourceDto _$SourceDtoFromJson(Map<String, dynamic> json) => SourceDto(
   id: json['id'] as String?,
   name: json['name'] as String?,
   description: json['description'] as String?,
@@ -16,7 +16,7 @@ Source _$SourceFromJson(Map<String, dynamic> json) => Source(
   country: json['country'] as String?,
 );
 
-Map<String, dynamic> _$SourceToJson(Source instance) => <String, dynamic>{
+Map<String, dynamic> _$SourceDtoToJson(SourceDto instance) => <String, dynamic>{
   'id': instance.id,
   'name': instance.name,
   'description': instance.description,

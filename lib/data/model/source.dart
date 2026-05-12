@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'source.g.dart';
 
 @JsonSerializable()
-class Source {
+class SourceDto {
   @JsonKey(name: "id")
   final String? id;
   @JsonKey(name: "name")
@@ -19,7 +19,7 @@ class Source {
   @JsonKey(name: "country")
   final String? country;
 
-  Source({
+  SourceDto({
     this.id,
     this.name,
     this.description,
@@ -29,11 +29,11 @@ class Source {
     this.country,
   });
 
-  factory Source.fromJson(Map<String, dynamic> json) {
-    return _$SourceFromJson(json);
+  factory SourceDto.fromJson(Map<String, dynamic> json) {
+    return _$SourceDtoFromJson(json);
   }
 
   Map<String, dynamic> toJson() {
-    return _$SourceToJson(this);
+    return _$SourceDtoToJson(this);
   }
 }

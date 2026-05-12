@@ -5,9 +5,9 @@ import 'source.dart';
 part 'article.g.dart';
 
 @JsonSerializable()
-class Article {
+class ArticleDto {
   @JsonKey(name: "source")
-  final Source? source;
+  final SourceDto? source;
   @JsonKey(name: "author")
   final String? author;
   @JsonKey(name: "title")
@@ -23,7 +23,7 @@ class Article {
   @JsonKey(name: "content")
   final String? content;
 
-  Article({
+  ArticleDto({
     this.source,
     this.author,
     this.title,
@@ -34,11 +34,11 @@ class Article {
     this.content,
   });
 
-  factory Article.fromJson(Map<String, dynamic> json) {
-    return _$ArticleFromJson(json);
+  factory ArticleDto.fromJson(Map<String, dynamic> json) {
+    return _$ArticleDtoFromJson(json);
   }
 
   Map<String, dynamic> toJson() {
-    return _$ArticleToJson(this);
+    return _$ArticleDtoToJson(this);
   }
 }

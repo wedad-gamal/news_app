@@ -11,7 +11,7 @@ class ArticleResponse {
   @JsonKey(name: "totalResults")
   final int? totalResults;
   @JsonKey(name: "articles")
-  final List<Article>? articles;
+  final List<ArticleDto>? articles;
 
   ArticleResponse({this.status, this.totalResults, this.articles});
 
