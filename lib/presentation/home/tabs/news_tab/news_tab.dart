@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:news_app/core/base/base_view.dart';
+import 'package:news_app/core/di/service_locator.dart';
 import 'package:news_app/core/resources/strings_manager.dart';
 import 'package:news_app/core/utilies/extensions.dart';
 import 'package:news_app/data/apis/api_client.dart';
@@ -14,6 +16,7 @@ import 'package:news_app/data/repository/news_repository.dart';
 import 'package:news_app/domain/repository/news_repository.dart';
 import 'package:news_app/domain/use_case/get_articles_use_case.dart';
 import 'package:news_app/domain/use_case/get_sources_use_case.dart';
+import 'package:news_app/presentation/home/home_view_model.dart';
 import 'package:news_app/presentation/home/tabs/news_tab/news_tab_view_model.dart';
 import 'package:news_app/presentation/home/widgets/articles/news_list.dart';
 import 'package:provider/provider.dart';
@@ -26,33 +29,18 @@ class NewsTab extends StatefulWidget {
   State<NewsTab> createState() => _NewsTabState();
 }
 
-class _NewsTabState extends State<NewsTab> {
-  late NewsTabViewModel newsTabViewModel = NewsTabViewModel(
-    widget.category,
-    GetSourcesUseCase(
-      NewsRepositoryImpl(
-        NewsRemoteDataSourceImpl(RetrofitService.instance),
-        NewsMapper(),
-      ),
-    ),
-    GetArticlesUseCase(
-      NewsRepositoryImpl(
-        NewsRemoteDataSourceImpl(RetrofitService.instance),
-        NewsMapper(),
-      ),
-    ),
-  );
-
+class _NewsTabState extends BaseView<NewsTab, NewsTabViewModel> {
   @override
   void initState() {
     super.initState();
-    newsTabViewModel.getSources();
+    viewModel.category = widget.category;
+    viewModel.getSources();
   }
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider.value(
-      value: newsTabViewModel,
+      value: viewModel,
       child: Consumer<NewsTabViewModel>(
         builder: (context, viewModel, child) {
           if (viewModel.newsIsLoading) {
@@ -90,5 +78,10 @@ class _NewsTabState extends State<NewsTab> {
     //     return NewsList(sources: snapshot.data?.sources ?? []);
     //   },
     // );
+  }
+
+  @override
+  NewsTabViewModel createViewModel() {
+    return getIt<NewsTabViewModel>();
   }
 }

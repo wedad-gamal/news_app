@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/base/base_view_model.dart';
 import 'package:news_app/data/apis/retrofit_service.dart';
 import 'package:news_app/data/model/article.dart' show ArticleDto;
 import 'package:news_app/data/model/category.dart';
@@ -9,25 +10,25 @@ import 'package:news_app/domain/entity/source_entity.dart';
 import 'package:news_app/domain/use_case/get_articles_use_case.dart';
 import 'package:news_app/domain/use_case/get_sources_use_case.dart';
 
-class NewsTabViewModel extends ChangeNotifier {
-  final Category category;
+class NewsTabViewModel extends BaseViewModel {
   final GetSourcesUseCase _getSourcesUseCase;
   final GetArticlesUseCase _getArticlesUseCase;
-  NewsTabViewModel(
-    this.category,
-    this._getSourcesUseCase,
-    this._getArticlesUseCase,
-  );
+  NewsTabViewModel(this._getSourcesUseCase, this._getArticlesUseCase);
 
+  late Category _category;
   List<SourceEntity> sources = [];
   String newsErrorMessage = "";
   bool newsIsLoading = false;
+
+  set category(Category value) {
+    _category = value;
+  }
 
   Future<void> getSources() async {
     newsIsLoading = true;
     notifyListeners();
     try {
-      var response = await _getSourcesUseCase(category.id);
+      var response = await _getSourcesUseCase(_category.id);
       sources = response;
       if (sources.isNotEmpty) {
         getArticles(0);
