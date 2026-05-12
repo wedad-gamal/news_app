@@ -6,6 +6,7 @@ import 'package:news_app/data/model/source.dart';
 import 'package:news_app/data/repository/news_repository.dart';
 import 'package:news_app/domain/entity/article_entity.dart';
 import 'package:news_app/domain/entity/source_entity.dart';
+import 'package:news_app/domain/repository/news_repository.dart';
 
 class NewsTabViewModel extends ChangeNotifier {
   final Category category;
