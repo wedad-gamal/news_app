@@ -12,6 +12,8 @@ import 'package:news_app/data/model/category.dart';
 import 'package:news_app/data/model/sources_response.dart';
 import 'package:news_app/data/repository/news_repository.dart';
 import 'package:news_app/domain/repository/news_repository.dart';
+import 'package:news_app/domain/use_case/get_articles_use_case.dart';
+import 'package:news_app/domain/use_case/get_sources_use_case.dart';
 import 'package:news_app/presentation/home/tabs/news_tab/news_tab_view_model.dart';
 import 'package:news_app/presentation/home/widgets/articles/news_list.dart';
 import 'package:provider/provider.dart';
@@ -27,9 +29,17 @@ class NewsTab extends StatefulWidget {
 class _NewsTabState extends State<NewsTab> {
   late NewsTabViewModel newsTabViewModel = NewsTabViewModel(
     widget.category,
-    NewsRepositoryImpl(
-      NewsRemoteDataSourceImpl(RetrofitService.instance),
-      NewsMapper(),
+    GetSourcesUseCase(
+      NewsRepositoryImpl(
+        NewsRemoteDataSourceImpl(RetrofitService.instance),
+        NewsMapper(),
+      ),
+    ),
+    GetArticlesUseCase(
+      NewsRepositoryImpl(
+        NewsRemoteDataSourceImpl(RetrofitService.instance),
+        NewsMapper(),
+      ),
     ),
   );
 

@@ -6,12 +6,18 @@ import 'package:news_app/data/model/source.dart';
 import 'package:news_app/data/repository/news_repository.dart';
 import 'package:news_app/domain/entity/article_entity.dart';
 import 'package:news_app/domain/entity/source_entity.dart';
-import 'package:news_app/domain/repository/news_repository.dart';
+import 'package:news_app/domain/use_case/get_articles_use_case.dart';
+import 'package:news_app/domain/use_case/get_sources_use_case.dart';
 
 class NewsTabViewModel extends ChangeNotifier {
   final Category category;
-  final NewsRepository _newsRepository;
-  NewsTabViewModel(this.category, this._newsRepository);
+  final GetSourcesUseCase _getSourcesUseCase;
+  final GetArticlesUseCase _getArticlesUseCase;
+  NewsTabViewModel(
+    this.category,
+    this._getSourcesUseCase,
+    this._getArticlesUseCase,
+  );
 
   List<SourceEntity> sources = [];
   String newsErrorMessage = "";
@@ -21,7 +27,7 @@ class NewsTabViewModel extends ChangeNotifier {
     newsIsLoading = true;
     notifyListeners();
     try {
-      var response = await _newsRepository.getSources(category.id);
+      var response = await _getSourcesUseCase(category.id);
       sources = response;
       if (sources.isNotEmpty) {
         getArticles(0);
@@ -43,7 +49,7 @@ class NewsTabViewModel extends ChangeNotifier {
     notifyListeners();
     var selectedSourceId = sources[index].id ?? "";
     try {
-      var response = await _newsRepository.getArticles(selectedSourceId);
+      var response = await _getArticlesUseCase(selectedSourceId);
       articles = response;
     } catch (e) {
       articleErrorMessage = e.toString();
