@@ -1,8 +1,10 @@
+import 'package:injectable/injectable.dart';
 import 'package:news_app/data/apis/retrofit_service.dart';
 import 'package:news_app/data/data_source/contract/news_remote_data_source.dart';
 import 'package:news_app/data/model/article.dart';
 import 'package:news_app/data/model/source.dart';
 
+@Injectable(as: NewsRemoteDataSource)
 class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
   final RetrofitService _retrofitService;
 
