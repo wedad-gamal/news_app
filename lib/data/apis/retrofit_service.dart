@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:injectable/injectable.dart';
 import 'package:news_app/data/model/article_response.dart';
 import 'package:news_app/data/model/articles_response.dart';
 import 'package:news_app/data/model/source_response.dart';
@@ -9,8 +10,10 @@ import 'package:retrofit/retrofit.dart';
 
 part 'retrofit_service.g.dart';
 
+@lazySingleton
 @RestApi(baseUrl: 'https://newsapi.org/v2/')
 abstract class RetrofitService {
+  @factoryMethod
   factory RetrofitService(Dio dio) = _RetrofitService;
 
   @GET('/top-headlines/sources')

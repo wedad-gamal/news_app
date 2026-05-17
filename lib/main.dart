@@ -1,18 +1,30 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive_ce/hive_ce.dart';
+import 'package:news_app/core/di/di.dart';
 import 'package:news_app/core/di/service_locator.dart';
 import 'package:news_app/core/providers/app_config_provider.dart';
 import 'package:news_app/core/resources/app_theme.dart';
+import 'package:news_app/data/model/article.dart';
+import 'package:news_app/data/model/source.dart';
 import 'package:news_app/presentation/home/screen/home_screen.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
-  // 1. Ensure Flutter bindings are initialized
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
-  // 2. Load the .env file
+
   await dotenv.load(fileName: ".env");
+
+  final Directory appDocumentsDir = await getApplicationDocumentsDirectory();
+  Hive.init(appDocumentsDir.path);
+
+  Hive.registerAdapter(SourceDtoAdapter());
+  Hive.registerAdapter(ArticleDtoAdapter());
 
   runApp(const NewsApp());
 }

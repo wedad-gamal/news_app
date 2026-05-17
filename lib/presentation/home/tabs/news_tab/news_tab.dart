@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:news_app/core/base/base_view.dart';
+import 'package:news_app/core/di/di.dart';
 import 'package:news_app/core/di/service_locator.dart';
 import 'package:news_app/core/resources/strings_manager.dart';
 import 'package:news_app/core/utilies/extensions.dart';

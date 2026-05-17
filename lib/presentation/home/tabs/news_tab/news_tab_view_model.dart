@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:news_app/core/base/base_view_model.dart';
 import 'package:news_app/data/apis/retrofit_service.dart';
 import 'package:news_app/data/model/article.dart' show ArticleDto;
@@ -10,6 +11,7 @@ import 'package:news_app/domain/entity/source_entity.dart';
 import 'package:news_app/domain/use_case/get_articles_use_case.dart';
 import 'package:news_app/domain/use_case/get_sources_use_case.dart';
 
+@injectable
 class NewsTabViewModel extends BaseViewModel {
   final GetSourcesUseCase _getSourcesUseCase;
   final GetArticlesUseCase _getArticlesUseCase;
